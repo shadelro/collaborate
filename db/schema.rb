@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131105191542) do
+ActiveRecord::Schema.define(version: 20131105191817) do
 
   create_table "collaborations", force: true do |t|
     t.datetime "created_at"
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 20131105191542) do
   create_table "tracks", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "author"
+    t.string   "title"
+    t.string   "instrument"
   end
 
   create_table "users", force: true do |t|
