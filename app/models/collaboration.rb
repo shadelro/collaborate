@@ -1,4 +1,6 @@
 class Collaboration < ActiveRecord::Base
-  has_and_belongs_to_many :users
+  belongs_to :user
+  has_many :users, through: :participations
+  has_many :participations
   has_many :songs
 end
