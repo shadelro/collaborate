@@ -1,25 +1,19 @@
 class ParticipationsController < ApplicationController
+  before_filter :authenticate_user!
+
   def new
-    @participation = Participation.new(
-      user_id: params[:user_id],
-      collaboration_id: params[:collaboration_id]
-    )
+    invitation = Invitation.find(params[:invitation_id])
+    @participation = Participation.new(collaboration_id: invitation.collaboration_id, user_id: invitation.user_id)
   end
 
   def create
-    @participation = Participation.new(participation_params)
-    if @participation.save
-      binding.pry
-      redirect_to user_collaboration_path(
-        participation_params[:user_id],
-        participation_params[:collaboration_id]
-      )
-    end
+    @participation = Participation.new({user_id: current_user.id}.merge!(participation_params))
+    redirect_to user_path(current_user) if @participation.save
   end
 
   private
 
   def participation_params
-    params.require(:participation).permit([:user_id, :collaboration_id])
+    @participation_params ||= params.require(:participation).permit([:collaboration_id, :user_id])
   end
 end

@@ -1,10 +1,9 @@
+<h3>Collaboration</h3>
 <p>Name: <%= @collaboration.name %></p>
-<p>Members:</p>
+<p>Owner: <%= link_to @collaboration.user.name, user_path(@collaboration.user) %></p>
+<p>Participants:</p>
 <ul>
-  <% @collaboration.users.each do |user| %>
-    <li><%= user.name %></li>
+  <% @collaboration.participants.each do |user| %>
+    <li><%= link_to user.name, user_path(user) %></li>
   <% end %>
 </ul>
-<% unless @collaboration.users.find { |user| user.id == current_user.id } %>
-  <p><%= link_to 'Join', new_participation_path(user_id: current_user.id, collaboration_id: @collaboration.id) %></p>
-<% end %>

@@ -4,9 +4,21 @@
 <p>Collaborations:</p>
 <ul>
   <% @user.collaborations.each do |collaboration| %>
-    <li><%= link_to collaboration.name, user_collaboration_path(@user, collaboration) %></li>
+    <li><%= link_to collaboration.name, collaboration_path(collaboration) %></li>
+  <% end %>
+</ul>
+<p>Participating in:</p>
+<ul>
+  <% @user.collaborations_as_participant.each do |collaboration| %>
+    <li><%= link_to collaboration.name, collaboration_path(collaboration) %></li>
   <% end %>
 </ul>
 <% if @user.id == current_user.id %>
-  <%= link_to 'Create a Collaboration', new_user_collaboration_path(@user) %>
+  <p>Invitations:</p>
+  <ul>
+    <% @user.invitations.each do |invitation| %>
+      <li><%= link_to invitation.collaboration.name, invitation_path(invitation) %></li>
+    <% end %>
+  </ul>
+  <%= link_to 'Create a Collaboration', new_collaboration_path %>
 <% end %>

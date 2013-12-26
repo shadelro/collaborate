@@ -1,5 +1,5 @@
 <p>Create a Collaboration:</p>
-<%= form_for [current_user, @collaboration] do |f| %>
+<%= form_for @collaboration do |f| %>
   <div class='fields'>
     <%= f.label :name %>
     <%= f.text_field :name %>

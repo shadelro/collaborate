@@ -3,12 +3,8 @@ Collaborate::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => "registrations"}
 
-  resources :users do
-    resources :collaborations do
-      resources :songs do
-        resources :tracks
-      end
-    end
-  end
-  resources :participations
+  resources :collaborations, only: [:index, :show, :new, :create]
+  resources :invitations, only: [:show, :destroy, :claim]
+  resources :participations, only: [:new, :create, :destroy]
+  resources :users, only: [:index, :show]
 end

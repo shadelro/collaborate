@@ -1,0 +1,6 @@
+<h3>Collaborations</h3>
+<ul>
+  <% @collaborations.each do |collaboration| %>
+    <li><%= link_to collaboration.name, collaboration_path(collaboration) %></li>
+  <% end %>
+</ul>
