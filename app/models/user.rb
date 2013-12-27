@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :collaborations
+  has_many :collaborations, dependent: :destroy
   has_many :collaborations_as_participant, through: :participations, source: :collaboration
   has_many :participations, dependent: :destroy
   has_many :collaborations_as_invited, through: :invitations, source: :collaboration

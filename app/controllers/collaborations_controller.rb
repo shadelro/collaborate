@@ -18,6 +18,11 @@ class CollaborationsController < ApplicationController
     redirect_to collaboration_path(@collaboration.id) if @collaboration.save
   end
 
+  def destroy
+    Collaboration.destroy_all({user_id: current_user.id}.merge!(id: params[:id]))
+    redirect_to user_path(current_user)
+  end
+
   private
 
   def collaboration_params
