@@ -7,8 +7,8 @@ class ParticipationsController < ApplicationController
   end
 
   def create
-    @participation = Participation.new({user_id: current_user.id}.merge!(participation_params))
-    redirect_to user_path(current_user) if @participation.save
+    @participation = Participation.new(participation_params)
+    redirect_to user_path(participation_params[:user_id]) if @participation.save
   end
 
   private

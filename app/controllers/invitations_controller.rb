@@ -7,7 +7,6 @@ class InvitationsController < ApplicationController
 
   def destroy
     Invitation.destroy_all(id: invitation_params[:id], user_id: current_user.id)
-
     redirect_to user_path(current_user)
   end
 

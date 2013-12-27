@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :collaborations_as_participant, through: :participations, source: :collaboration
   has_many :participations, dependent: :destroy
   has_many :collaborations_as_invited, through: :invitations, source: :collaboration
-  has_many :invitations
+  has_many :invitations, dependent: :destroy
 
   def all_collaborations
     self.collaborations | self.collaborations_as_participant
