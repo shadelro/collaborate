@@ -7,3 +7,6 @@
     <li><%= link_to user.name, user_path(user) %></li>
   <% end %>
 </ul>
+<% if @collaboration.user == current_user %>
+  <p><%= link_to 'Invite', new_invitation_path(collaboration_id: @collaboration.id) %></p>
+<% end %>

@@ -4,7 +4,7 @@ Collaborate::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
 
   resources :collaborations, only: [:index, :show, :new, :create]
-  resources :invitations, only: [:show, :destroy, :claim]
+  resources :invitations, only: [:show, :new, :create, :destroy, :claim]
   resources :participations, only: [:new, :create, :destroy]
   resources :users, only: [:index, :show]
 end

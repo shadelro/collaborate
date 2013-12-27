@@ -3,7 +3,7 @@ class ParticipationsController < ApplicationController
 
   def new
     invitation = Invitation.find(params[:invitation_id])
-    @participation = Participation.new(collaboration_id: invitation.collaboration_id, user_id: invitation.user_id)
+    @participation = Participation.new_from_invitation(params[:invitation_id])
   end
 
   def create

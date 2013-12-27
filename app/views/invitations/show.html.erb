@@ -1,4 +1,4 @@
 <h3>Invitation</h3>
 <p><%= @invitation.collaboration.user.name %> has invited you to join <%= @invitation.collaboration.name %></p>
-<p><%= button_to 'Claim', participations_path(participation: {user_id: @invitation.user_id, collaboration_id: @invitation.collaboration.id}) %></p>
+<p><%= button_to 'Accept', participations_path(participation: {user_id: @invitation.user_id, collaboration_id: @invitation.collaboration.id}) %></p>
 <p><%= button_to 'Decline', invitation_path(@invitation), method: :delete %></p>

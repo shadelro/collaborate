@@ -1,0 +1,11 @@
+<p>Create an invitation:</p>
+<%= form_for @invitation do |f| %>
+  <div class='fields'>
+    <%= f.hidden_field :collaboration_id %>
+
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
