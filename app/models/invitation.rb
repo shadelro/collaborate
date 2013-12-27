@@ -5,8 +5,7 @@ class Invitation < ActiveRecord::Base
   validates_uniqueness_of :user_id, scope: [:collaboration_id]
 
   before_validation(on: :create) do
-    !Collaboration.where(id: self.collaboration_id, user_id: self.user_id).any? &&
-      !Participation.where(collaboration_id: self.collaboration_id, user_id: self.user_id).any?
+    !User.find(self.user_id).all_collaborations.map(&:id).include?(self.collaboration_id)
   end
 
   def self.new_from_email(email, options = {})
