@@ -12,12 +12,12 @@ class InvitationsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     @invitation = Invitation.new(user_id: user.id, collaboration_id: invitation_params[:collaboration_id])
-    redirect_to collaboration_path(@invitation.collaboration) if @invitation.save
+    redirect_to @invitation.collaboration if @invitation.save
   end
 
   def destroy
     Invitation.destroy_all(id: params[:id], user_id: current_user.id)
-    redirect_to user_path(current_user)
+    redirect_to current_user
   end
 
   private

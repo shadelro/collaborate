@@ -10,4 +10,6 @@
 <% if @collaboration.user == current_user %>
   <p><%= link_to 'Invite', new_invitation_path(collaboration_id: @collaboration.id) %></p>
   <p><%= button_to 'Delete', collaboration_path(@collaboration), method: :delete %></p>
+<% else %>
+  <p><%= button_to 'Leave', participation_path(@collaboration.participations.find { |p| p.user_id == current_user.id }), method: :delete %></p>
 <% end %>

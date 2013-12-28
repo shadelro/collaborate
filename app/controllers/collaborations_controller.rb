@@ -15,12 +15,12 @@ class CollaborationsController < ApplicationController
 
   def create
     @collaboration = Collaboration.new({user_id: current_user.id}.merge!(collaboration_params))
-    redirect_to collaboration_path(@collaboration.id) if @collaboration.save
+    redirect_to @collaboration if @collaboration.save
   end
 
   def destroy
-    Collaboration.destroy_all({user_id: current_user.id}.merge!(id: params[:id]))
-    redirect_to user_path(current_user)
+    Collaboration.destroy_all(id: params[:id], user_id: current_user.id)
+    redirect_to current_user
   end
 
   private
