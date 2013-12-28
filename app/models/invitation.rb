@@ -8,6 +8,10 @@ class Invitation < ActiveRecord::Base
     !User.find(self.user_id).all_collaborations.map(&:id).include?(self.collaboration_id)
   end
 
+  scope :with_collaboration, -> {
+    includes(:collaboration)
+  }
+
   def self.new_from_email(email, options = {})
     user = User.find_by_email(email)
     Invitation.new({user_id: user.id}.merge!(options))

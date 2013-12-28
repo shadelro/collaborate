@@ -6,4 +6,8 @@ class Collaboration < ActiveRecord::Base
   has_many :invitations, dependent: :destroy
 
   validates_uniqueness_of :name
+
+  scope :with_users, -> {
+    includes(:user).includes(:participants)
+  }
 end

@@ -6,7 +6,7 @@ class CollaborationsController < ApplicationController
   end
 
   def show
-    @collaboration = Collaboration.find(params[:id])
+    @collaboration = Collaboration.with_users.find(params[:id])
   end
 
   def new

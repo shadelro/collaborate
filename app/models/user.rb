@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   has_many :collaborations, dependent: :destroy
   has_many :collaborations_as_participant, through: :participations, source: :collaboration
   has_many :participations, dependent: :destroy
-  has_many :collaborations_as_invited, through: :invitations, source: :collaboration
   has_many :invitations, dependent: :destroy
 
   validates_uniqueness_of :email
@@ -15,4 +14,8 @@ class User < ActiveRecord::Base
   def all_collaborations
     self.collaborations | self.collaborations_as_participant
   end
+
+  scope :with_collaborations_and_invitations, -> {
+    includes(:collaborations, :collaborations_as_participant, :invitations)
+  }
 end

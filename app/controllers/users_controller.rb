@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.with_collaborations_and_invitations.find(params[:id])
   end
 
 end
