@@ -1,15 +1,20 @@
 <h3>Collaboration</h3>
 <p>Name: <%= @collaboration.name %></p>
-<p>Owner: <%= link_to @collaboration.user.name, user_path(@collaboration.user) %></p>
+<p>Owner: <%= link_to @collaboration.user.name, @collaboration.user %></p>
 <p>Participants:</p>
 <ul>
   <% @collaboration.participants.each do |user| %>
-    <li><%= link_to user.name, user_path(user) %></li>
+    <li><%= link_to user.name, user %></li>
+  <% end %>
+</ul>
+<ul>
+  <% @collaboration.songs.each do |song| %>
+    <li><%= link_to song.name, song %></li>
   <% end %>
 </ul>
 <% if @collaboration.user == current_user %>
   <p><%= link_to 'Invite', new_invitation_path(collaboration_id: @collaboration.id) %></p>
-  <p><%= button_to 'Delete', collaboration_path(@collaboration), method: :delete %></p>
+  <p><%= button_to 'Delete', @collaboration, method: :delete %></p>
 <% elsif @collaboration.participants.include? current_user %>
-  <p><%= button_to 'Leave', participation_path(@collaboration.participations.map(&:user_id).find(current_user.id)), method: :delete %></p>
+  <p><%= button_to 'Leave', @collaboration.participations.map(&:user_id).find(current_user.id), method: :delete %></p>
 <% end %>
